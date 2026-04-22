@@ -1,22 +1,17 @@
 import type { Metadata } from "next";
-import { DM_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Noto_Sans_TC } from "next/font/google";
 import "./globals.css";
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
+const notoSansTC = Noto_Sans_TC({
+  variable: "--font-noto-sans-tc",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-});
-
-const ibmPlexMono = IBM_Plex_Mono({
-  variable: "--font-ibm-plex-mono",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "700", "900"],
 });
 
 export const metadata: Metadata = {
-  title: "Creatify — AI 廣告贏得市場",
-  description: "貼上產品網址。取得10支影片廣告。自動測試什麼能轉換。",
+  title: "台灣健康空氣行動聯盟 | Air Clean Taiwan",
+  description:
+    "台灣健康空氣行動聯盟（ACT）透過公民倡議、科學監測與教育推廣，推動台灣空氣品質達到國際標準。乾淨的空氣，是每個人的基本權利。",
 };
 
 export default function RootLayout({
@@ -27,9 +22,9 @@ export default function RootLayout({
   return (
     <html
       lang="zh-TW"
-      className={`${dmSans.variable} ${ibmPlexMono.variable} h-full antialiased`}
+      className={`${notoSansTC.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col antialiased">{children}</body>
     </html>
   );
 }

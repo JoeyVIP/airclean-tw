@@ -1,18 +1,18 @@
 const results = [
   {
-    number: "3×",
-    label: "Higher ROAS",
-    desc: "On average, brands using Creatify see 3x return vs. traditional ad production",
+    number: "4.7×",
+    label: "更高廣告回報",
+    desc: "平均而言，使用本平台的品牌獲得比傳統廣告製作高出近 5 倍的回報率",
   },
   {
-    number: "90%",
-    label: "Faster to launch",
-    desc: "Go from idea to live ad in minutes, not weeks. No agency, no shoot required.",
+    number: "95%",
+    label: "更快上線速度",
+    desc: "從創意到上線廣告只需幾分鐘，不需代理商，不需拍攝現場",
   },
   {
-    number: "10×",
-    label: "More creative volume",
-    desc: "Test 10x more ad variants and let data pick your winner automatically",
+    number: "15×",
+    label: "更多創意素材",
+    desc: "測試 15 倍以上的廣告變體，讓數據自動選出最佳獲勝廣告",
   },
 ];
 
@@ -36,16 +36,16 @@ export function Results() {
         {/* Section header */}
         <div className="text-center mb-16">
           <span className="inline-block text-xs font-semibold tracking-widest uppercase mb-4 px-3 py-1 rounded-full text-white/70 border border-white/20">
-            Real Results
+            真實成效
           </span>
           <h2
             className="font-semibold text-white leading-tight"
             style={{ fontSize: "clamp(32px, 5vw, 52px)", letterSpacing: "-1.2px" }}
           >
-            Numbers that move the needle
+            讓業績真正動起來的數字
           </h2>
           <p className="mt-4 text-white/60 text-base max-w-[480px] mx-auto">
-            Thousands of brands have replaced their old ad workflows with Creatify. Here&apos;s what they found.
+            數千個品牌已用本平台取代舊有廣告流程，以下是他們的真實成果。
           </p>
         </div>
 
@@ -75,7 +75,7 @@ export function Results() {
             className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-semibold text-white transition-all hover:opacity-90 hover:scale-105"
             style={{ backgroundColor: "rgb(87, 60, 255)", boxShadow: "0 0 40px rgba(87,60,255,0.6)" }}
           >
-            See all case studies
+            查看所有案例研究
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>

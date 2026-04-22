@@ -4,37 +4,43 @@ const badges = [
   {
     icon: Shield,
     title: "SOC 2 Type II",
-    desc: "Enterprise-grade security audited annually",
+    desc: "每年稽核的企業級安全標準",
   },
   {
     icon: Lock,
-    title: "GDPR Compliant",
-    desc: "Full compliance with EU data protection laws",
+    title: "GDPR 合規",
+    desc: "完全符合歐盟個人資料保護法規",
   },
   {
     icon: Globe,
-    title: "CCPA Ready",
-    desc: "California Consumer Privacy Act certified",
+    title: "CCPA 認證",
+    desc: "加州消費者隱私法案認證通過",
   },
   {
     icon: CheckCircle,
     title: "ISO 27001",
-    desc: "International information security standard",
+    desc: "國際資訊安全管理系統認證",
   },
   {
     icon: Award,
-    title: "G2 Leader",
-    desc: "Top-rated AI video platform — 4.8/5 stars",
+    title: "業界評分第一",
+    desc: "AI 影片平台最高評分，4.8/5 顆星",
   },
   {
     icon: Zap,
-    title: "99.9% Uptime",
-    desc: "Enterprise SLA with dedicated support",
+    title: "99.9% 正常運行",
+    desc: "企業級 SLA 保障，專屬客服支援",
   },
 ];
 
-const enterpriseLogos = [
-  "Nike", "Sony", "L'Oréal", "Unilever", "Samsung", "Microsoft",
+// 抽象色塊代表企業客戶，不顯示任何真實品牌名稱
+const enterprisePlaceholders = [
+  { color: "bg-gray-200", width: "w-20" },
+  { color: "bg-gray-200", width: "w-16" },
+  { color: "bg-gray-200", width: "w-24" },
+  { color: "bg-gray-200", width: "w-18" },
+  { color: "bg-gray-200", width: "w-20" },
+  { color: "bg-gray-200", width: "w-22" },
 ];
 
 export function TrustBadges() {
@@ -47,16 +53,16 @@ export function TrustBadges() {
             className="inline-block text-xs font-semibold tracking-widest uppercase mb-4 px-3 py-1 rounded-full"
             style={{ color: "rgb(87,60,255)", background: "rgba(87,60,255,0.08)" }}
           >
-            Trust & Security
+            信任與安全
           </span>
           <h2
             className="font-semibold text-gray-900 leading-tight"
             style={{ fontSize: "clamp(28px, 4vw, 44px)", letterSpacing: "-1px" }}
           >
-            Enterprise-ready from day one
+            從第一天起就達到企業級標準
           </h2>
           <p className="mt-3 text-gray-500 text-base max-w-[480px] mx-auto">
-            Creatify meets the security and compliance standards that Fortune 500 companies demand.
+            本平台符合頂尖企業對資安與合規的最高要求，讓您安心使用。
           </p>
         </div>
 
@@ -82,19 +88,17 @@ export function TrustBadges() {
           })}
         </div>
 
-        {/* Enterprise social proof */}
+        {/* Enterprise social proof — abstract placeholders */}
         <div className="mt-14 text-center">
           <p className="text-xs font-medium text-gray-400 uppercase tracking-widest mb-6">
-            Trusted by enterprise teams at
+            企業客戶信賴使用
           </p>
           <div className="flex flex-wrap items-center justify-center gap-8">
-            {enterpriseLogos.map((logo, i) => (
-              <span
+            {enterprisePlaceholders.map((item, i) => (
+              <div
                 key={i}
-                className="text-sm font-semibold text-gray-300 hover:text-gray-400 transition-colors cursor-pointer"
-              >
-                {logo}
-              </span>
+                className={`h-6 rounded-md ${item.color} ${item.width} opacity-40`}
+              />
             ))}
           </div>
         </div>

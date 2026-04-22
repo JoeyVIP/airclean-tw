@@ -1,145 +1,120 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
-import { Menu, X, ChevronDown } from "lucide-react";
-
-const navLinks = [
-  {
-    label: "Product",
-    href: "#",
-    hasDropdown: true,
-  },
-  {
-    label: "Pricing",
-    href: "#",
-    hasDropdown: false,
-  },
-  {
-    label: "Case Studies",
-    href: "#",
-    hasDropdown: false,
-  },
-  {
-    label: "Blog",
-    href: "#",
-    hasDropdown: false,
-  },
-];
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
+import { ActLogo } from "@/components/ActLogo";
+import { navLinks } from "@/lib/content";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 24);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const isHome = pathname === "/";
+  const isTransparent = isHome && !scrolled;
 
   return (
     <nav
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        backgroundColor: scrolled ? "rgba(255,255,255,0.96)" : "transparent",
-        backdropFilter: scrolled ? "blur(12px)" : "none",
-        boxShadow: scrolled ? "0 1px 0 rgba(0,0,0,0.08)" : "none",
+        backgroundColor: isTransparent ? "transparent" : "rgba(255,255,255,0.97)",
+        backdropFilter: isTransparent ? "none" : "blur(12px)",
+        boxShadow: isTransparent ? "none" : "0 1px 0 oklch(0.90 0.02 230)",
       }}
     >
-      <div className="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
         {/* Logo */}
-        <a href="/" className="flex items-center shrink-0">
-          <Image
-            src="/images/logo.png"
-            alt="Creatify AI logo"
-            width={130}
-            height={24}
-            className="h-7 w-auto"
-            priority
-          />
-        </a>
+        <Link href="/" className="shrink-0">
+          <ActLogo variant={isTransparent ? "light" : "dark"} />
+        </Link>
 
-        {/* Desktop Nav */}
+        {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="flex items-center gap-0.5 px-4 py-2 rounded-full text-sm font-medium transition-colors"
-              style={{
-                color: scrolled ? "rgb(20,20,20)" : "rgba(255,255,255,0.9)",
-              }}
-            >
-              {link.label}
-              {link.hasDropdown && (
-                <ChevronDown
-                  size={14}
-                  className="opacity-60 mt-px"
-                />
-              )}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            const active = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="px-4 py-2 rounded-md text-sm font-medium transition-colors"
+                style={{
+                  color: isTransparent
+                    ? "rgba(255,255,255,0.9)"
+                    : active
+                    ? "oklch(0.55 0.12 230)"
+                    : "oklch(0.25 0.04 230)",
+                  backgroundColor:
+                    active && !isTransparent
+                      ? "oklch(0.92 0.04 230)"
+                      : "transparent",
+                }}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </div>
 
-        {/* CTA Buttons */}
+        {/* CTA */}
         <div className="hidden md:flex items-center gap-3">
-          <a
-            href="#"
-            className="px-4 py-2 text-sm font-medium rounded-full transition-colors"
-            style={{
-              color: scrolled ? "rgb(20,20,20)" : "rgba(255,255,255,0.9)",
-            }}
+          <Link
+            href="/contact"
+            className="px-5 py-2 text-sm font-semibold rounded-md text-white transition-opacity hover:opacity-90"
+            style={{ backgroundColor: "oklch(0.55 0.12 230)" }}
           >
-            Log in
-          </a>
-          <a
-            href="#"
-            className="px-5 py-2 text-sm font-semibold rounded-full text-white transition-all hover:opacity-90"
-            style={{ backgroundColor: "rgb(87, 60, 255)" }}
-          >
-            Start for free
-          </a>
+            加入行動
+          </Link>
         </div>
 
-        {/* Mobile Menu Toggle */}
+        {/* Mobile toggle */}
         <button
-          className="md:hidden p-2 rounded-lg"
+          className="md:hidden p-2 rounded-md"
           onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-          style={{ color: scrolled ? "rgb(20,20,20)" : "white" }}
+          aria-label="切換選單"
+          style={{
+            color: isTransparent ? "white" : "oklch(0.25 0.04 230)",
+          }}
         >
           {mobileOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-white border-t border-gray-100 px-6 py-4 flex flex-col gap-2">
+        <div className="md:hidden bg-white border-t px-5 py-4 flex flex-col gap-1"
+          style={{ borderColor: "oklch(0.90 0.02 230)" }}
+        >
           {navLinks.map((link) => (
-            <a
-              key={link.label}
+            <Link
+              key={link.href}
               href={link.href}
-              className="py-3 text-sm font-medium text-gray-800 border-b border-gray-100 last:border-0"
+              className="py-3 text-sm font-medium border-b last:border-0"
+              style={{
+                color: "oklch(0.20 0.06 230)",
+                borderColor: "oklch(0.94 0.02 230)",
+              }}
+              onClick={() => setMobileOpen(false)}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
-          <div className="pt-3 flex flex-col gap-2">
-            <a
-              href="#"
-              className="py-2.5 text-center text-sm font-medium text-gray-800 border border-gray-200 rounded-full"
+          <div className="pt-3">
+            <Link
+              href="/contact"
+              className="block py-2.5 text-center text-sm font-semibold text-white rounded-md"
+              style={{ backgroundColor: "oklch(0.55 0.12 230)" }}
+              onClick={() => setMobileOpen(false)}
             >
-              Log in
-            </a>
-            <a
-              href="#"
-              className="py-2.5 text-center text-sm font-semibold text-white rounded-full"
-              style={{ backgroundColor: "rgb(87, 60, 255)" }}
-            >
-              Start for free
-            </a>
+              加入行動
+            </Link>
           </div>
         </div>
       )}

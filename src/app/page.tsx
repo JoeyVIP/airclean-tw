@@ -1,13 +1,9 @@
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
-import { BrandCarousel } from "@/components/BrandCarousel";
 import { StatsBar } from "@/components/StatsBar";
-import { ProcessSteps } from "@/components/ProcessSteps";
-import { ToolkitGrid } from "@/components/ToolkitGrid";
-import { Results } from "@/components/Results";
-import { CaseStudies } from "@/components/CaseStudies";
-import { BlogSection } from "@/components/BlogSection";
-import { TrustBadges } from "@/components/TrustBadges";
+import { ActivitiesSection } from "@/components/ActivitiesSection";
+import { GalleryCarousel } from "@/components/GalleryCarousel";
+import { NewsPreview } from "@/components/NewsPreview";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
@@ -16,14 +12,10 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <BrandCarousel />
         <StatsBar />
-        <ProcessSteps />
-        <ToolkitGrid />
-        <Results />
-        <CaseStudies />
-        <BlogSection />
-        <TrustBadges />
+        <ActivitiesSection />
+        <GalleryCarousel />
+        <NewsPreview />
       </main>
       <Footer />
     </>
