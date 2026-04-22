@@ -11,6 +11,9 @@ ARG NODE_VERSION=20-alpine
 
 FROM node:${NODE_VERSION} AS dependencies
 
+# Alpine 必要套件（Next.js standalone 需要）
+RUN apk add --no-cache libc6-compat
+
 # Set working directory
 WORKDIR /app
 
@@ -36,6 +39,8 @@ RUN --mount=type=cache,target=/root/.npm \
 # ============================================
 
 FROM node:${NODE_VERSION} AS builder
+
+RUN apk add --no-cache libc6-compat
 
 # Set working directory
 WORKDIR /app
